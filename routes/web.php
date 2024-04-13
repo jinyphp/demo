@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 // Fallack 사이트 오토라우팅
-//
 Route::fallback(function () {
 
     if(isset($_SERVER['REQUEST_URI'])) {
@@ -19,7 +18,8 @@ Route::fallback(function () {
     }
 
     // fallback 리소스에서
-    return view("fallback::404");
+    //return view("fallback::404");
+    return $_SERVER['REQUEST_URI']."의 리소스를 찾을 수 없습니다.";
 
 })->middleware('web');
 
@@ -35,7 +35,7 @@ function route_dynamic($uri) {
         return $res;
     }
 
-    //9. 리소스가 
+    //9. 리소스가
     if($res = route_isBladeResource($uri)) {
         return $res;
     }
